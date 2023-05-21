@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -556,6 +557,11 @@ public class Telas extends JFrame {
 		Buscar.add(btnVoltar);
 		
 		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(list.getSelectedValue());
+			}
+		});
 		btnBuscar.setEnabled(false);
 		btnBuscar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnBuscar.setBounds(447, 41, 193, 74);
@@ -726,27 +732,7 @@ public class Telas extends JFrame {
 			new Object[][] {
 				{"ca", "ca", "da", "ba"},
 				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
+
 			},
 			new String[] {
 				"ID", "Tema", "Sub\u00E1rea", "Quantidade"

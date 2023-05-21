@@ -14,7 +14,7 @@ public class Listas {
 		auno = busca.buscarAluno(auno);
 		DefaultListModel DLM = new DefaultListModel();
 		while(!auno.isEmpty()) {
-			DLM.addElement(auno.pop()+""+auno.pop());
+			DLM.addElement("RA:"+auno.pop()+";"+"Aluno:"+auno.pop());
 			cont ++;
 		}
 		list.setModel(DLM);
