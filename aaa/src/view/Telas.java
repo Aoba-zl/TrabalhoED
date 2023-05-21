@@ -1,5 +1,5 @@
 package view;
-//LALALALALAL
+//LALALALALALA
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
