@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.List;
+
 import PilhaObject.PilhaObject;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -17,11 +19,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import PilhaObject.PilhaObject;
 import controller.Buscar;
 import controller.Salvar;
+import controllerFila.FilaObject;
 import model.Grupo;
 import telaController.Listas;
 import telaController.SelecionaAluno;
@@ -51,6 +55,10 @@ public class TelaCadastrarGrupos {
 	private JPanel Buscar;
 	private JScrollPane scrollPane;
 
+	/**
+	 * 
+	 * @wbp.parser.entryPoint
+	 */
 	public void cadastrarGrupos(JTabbedPane tabbedPane) {
 		Listas geraListaAluno = new Listas();
 		Grupo grupo = new Grupo();
@@ -155,12 +163,14 @@ public class TelaCadastrarGrupos {
 		panelGrupo_1.add(lblAlunos);
 		
 		textAluno1 = new JTextField();
+		textAluno1.setVisible(false);
 		textAluno1.setEditable(false);
 		textAluno1.setBounds(10, 114, 211, 20);
 		panelGrupo_1.add(textAluno1);
 		textAluno1.setColumns(10);
 		
 		btnAluno3 = new JButton("Buscar");
+		btnAluno3.setVisible(false);
 		btnAluno3.setBounds(224, 225, 78, 23);
 		btnAluno3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -169,47 +179,44 @@ public class TelaCadastrarGrupos {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				textoAluno = textAluno3;
-				panelGrupo_1.setVisible(false);
-				panelGrupo_1.setEnabled(false);
-				btnBuscar.setEnabled(true);
-				btnVoltar.setEnabled(true);
+				GeraLista(textAluno3,geraListaAluno);
 			}
 		});
 		panelGrupo_1.add(btnAluno3);
 		
 		textAluno2 = new JTextField();
+		textAluno2.setVisible(false);
 		textAluno2.setEditable(false);
 		textAluno2.setBounds(10, 171, 211, 20);
 		textAluno2.setColumns(10);
 		panelGrupo_1.add(textAluno2);
 		
 		btnAluno4 = new JButton("Buscar");
+		btnAluno4.setVisible(false);
 		btnAluno4.setBounds(224, 281, 78, 23);
 		btnAluno4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textoAluno = textAluno4;
-				panelGrupo_1.setVisible(false);
-				panelGrupo_1.setEnabled(false);
-				btnBuscar.setEnabled(true);
-				btnVoltar.setEnabled(true);
+				GeraLista(textAluno4,geraListaAluno);
 			}
 		});
 		panelGrupo_1.add(btnAluno4);
 		
 		textAluno3 = new JTextField();
+		textAluno3.setVisible(false);
 		textAluno3.setEditable(false);
 		textAluno3.setBounds(10, 226, 211, 20);
 		textAluno3.setColumns(10);
 		panelGrupo_1.add(textAluno3);
 		
 		textAluno4 = new JTextField();
+		textAluno4.setVisible(false);
 		textAluno4.setEditable(false);
 		textAluno4.setBounds(10, 282, 211, 20);
 		textAluno4.setColumns(10);
 		panelGrupo_1.add(textAluno4);
 		
 		btnAluno2 = new JButton("Buscar");
+		btnAluno2.setVisible(false);
 		btnAluno2.setBounds(224, 170, 78, 23);
 		btnAluno2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -218,32 +225,17 @@ public class TelaCadastrarGrupos {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				textoAluno = textAluno2;
-				panelGrupo_1.setVisible(false);
-				panelGrupo_1.setEnabled(false);
-				btnBuscar.setEnabled(true);
-				btnVoltar.setEnabled(true);
-				list.setEnabled(true);
+				GeraLista(textAluno2,geraListaAluno);
 			}
 		});
 		panelGrupo_1.add(btnAluno2);
 		
 		btnAluno1 = new JButton("Buscar");
+		btnAluno1.setVisible(false);
 		btnAluno1.setBounds(224, 113, 78, 23);
 		btnAluno1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					geraListaAluno.listaAluno(list);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				textoAluno = textAluno1;
-				panelGrupo_1.setVisible(false);
-				panelGrupo_1.setEnabled(false);
-				btnBuscar.setEnabled(true);
-				btnVoltar.setEnabled(true);
-				list.setEnabled(true);
-				
+				GeraLista(textAluno1,geraListaAluno);
 			}
 		});
 		panelGrupo_1.add(btnAluno1);
@@ -324,17 +316,21 @@ public class TelaCadastrarGrupos {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					grupo.setID(comboBox.getSelectedItem().toString());
-					textFieldID.setText("0"+grupo.getID());
+					if (grupo.getID() < 10) {
+						textFieldID.setText("0"+grupo.getID());
+					}else {
+						textFieldID.setText(grupo.getID()+"");
+					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-			controller.Buscar buscaSub = new Buscar();
-			PilhaObject pilhaSub = new PilhaObject();
+			Buscar buscaSub = new Buscar();
+			FilaObject filaSub = new FilaObject();
 			try {
-				buscaSub.buscarSubarea(pilhaSub);
-				adiciona(pilhaSub);
+				buscaSub.buscarSubarea(filaSub);
+				adiciona(filaSub);
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
@@ -357,6 +353,8 @@ public class TelaCadastrarGrupos {
 				panelGrupo_1.setVisible(true);
 				btnBuscar.setEnabled(false);
 				btnVoltar.setEnabled(false);
+				list.setEnabled(false);
+				scrollPane.setEnabled(false);
 			}
 		});
 		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -368,6 +366,12 @@ public class TelaCadastrarGrupos {
 			public void actionPerformed(ActionEvent e) {
 				SelecionaAluno seleciona = new SelecionaAluno();
 				textoAluno.setText(seleciona.nomeAluno(list.getSelectedValue().toString()));
+				panelGrupo_1.setVisible(true);
+				btnBuscar.setEnabled(false);
+				btnBuscar.setVisible(false);
+				btnVoltar.setEnabled(false);
+				list.setEnabled(false);
+				scrollPane.setEnabled(false);
 			}
 		});
 		btnBuscar.setEnabled(false);
@@ -397,14 +401,28 @@ public class TelaCadastrarGrupos {
 		btnAluno3.setVisible(c);
 		btnAluno4.setVisible(d);
 	}
-	private void adiciona(PilhaObject pilhaSub) {
+	private void adiciona(FilaObject filaSub) {
 
-		while (!pilhaSub.isEmpty()) {
+		while (!filaSub.filaVazia()) {
 			try {
-				comboBox.addItem(pilhaSub.pop());;
+				comboBox.addItem(filaSub.remove());;
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
+	}
+	private void GeraLista (JTextField textAluno, Listas geraListaAluno) {
+		try {
+			geraListaAluno.listaAluno(list);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		textoAluno = textAluno;
+		panelGrupo_1.setVisible(false);
+		panelGrupo_1.setEnabled(false);
+		btnBuscar.setEnabled(true);
+		btnVoltar.setEnabled(true);
+		list.setEnabled(true);
+		btnBuscar.setVisible(true);
 	}
 }

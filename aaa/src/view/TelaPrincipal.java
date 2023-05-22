@@ -29,6 +29,7 @@ public class TelaPrincipal extends JFrame{
 		TelaCadastraSubarea CS = new TelaCadastraSubarea();
 		TelaCadastrarGrupos CG = new TelaCadastrarGrupos();
 		TelaCadastrarOrientacao CO = new TelaCadastrarOrientacao();
+		TelaConsultaGrupos CONG = new TelaConsultaGrupos ();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 696, 407);
 		contentPane = new JPanel();
@@ -45,5 +46,6 @@ public class TelaPrincipal extends JFrame{
 		CS.cadastraSubarea(tabbedPane);
 		CG.cadastrarGrupos(tabbedPane);
 		CO.cadastrarOrientacao(tabbedPane);
+		CONG.TelaConsulta(tabbedPane);
 	}
 }

@@ -43,7 +43,7 @@ public class TelaCadastraSubarea {
 						Save.SalvarSubarea(Sub);
 						textPaneSubarea.setText("");
 					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null, "A area deve ser preenchida");
+						e1.printStackTrace();
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "A area deve ser preenchida");

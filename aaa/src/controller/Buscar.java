@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import PilhaObject.PilhaObject;
+import controllerFila.FilaObject;
 
 public class Buscar {
 	public PilhaObject buscarAluno(PilhaObject pilhaAluno) throws IOException {
@@ -28,7 +29,7 @@ public class Buscar {
 		}
 		return pilhaAluno;
 	}
-	public void buscarSubarea(PilhaObject pilhaSub) throws Exception {
+	public void buscarSubarea(FilaObject filaSub) throws Exception {
 		File arq = new File("C:\\TEMP", "Subarea.csv");
 		if (arq.exists() && arq.isFile()) {
 			FileInputStream abreFluxoArq = new FileInputStream(arq);
@@ -37,7 +38,7 @@ public class Buscar {
 			String linha = buffer.readLine();
 			while (linha != null) {
 				String[] vetLinha = linha.split(";");
-				pilhaSub.push(vetLinha[0]);
+				filaSub.insert(vetLinha[0]);
 				linha = buffer.readLine();
 			}
 			buffer.close();

@@ -2,6 +2,7 @@ package model;
 
 import PilhaObject.PilhaObject;
 import controller.Buscar;
+import controllerFila.FilaObject;
 
 public class Grupo {
 	private int quantidade;
@@ -35,12 +36,12 @@ public class Grupo {
 	private int geraID(String subarea) throws Exception {
 		Buscar busca = new Buscar();
 		
-		PilhaObject pilha = new PilhaObject();
-		busca.buscarSubarea(pilha);
+		FilaObject fila = new FilaObject();
+		busca.buscarSubarea(fila);
 		int id=0;
-		while (!pilha.isEmpty()) {
+		while (!fila.filaVazia()) {
 			id++;
-			String topo = (String) pilha.pop();
+			String topo = (String) fila.remove();
 			if (topo.contains(subarea)) {
 				break;
 			}else if (subarea == "   ") {

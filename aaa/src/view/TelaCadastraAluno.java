@@ -52,6 +52,8 @@ public class TelaCadastraAluno {
 				if (A.getRA().length() == 13 && A.getNomeA().length() > 1) {
 					try {
 						Save.SalvarAluno(A);
+						textFieldNome.setText("");
+						textFieldRA.setText("");
 					} catch (Exception e1) {
 						e1.printStackTrace();	
 					}

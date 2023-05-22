@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JTabbedPane;
 public class TelaInicial {
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public void Inicial(JTabbedPane tabbedPane){
 		JPanel Inicio = new JPanel();
 		tabbedPane.addTab("Inicio", null, Inicio, null);
