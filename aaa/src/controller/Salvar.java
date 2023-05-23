@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -37,7 +38,30 @@ public class Salvar {
 				throw new IOException("Diretório Inválido");
 			}
 	}
-	public void SalvarSubarea(Subarea S) throws Exception {
+	public void SalvarArea() throws IOException {
+		File arq = new File("C:\\TEMP", "Area.csv");
+		boolean existe = false;
+		if (arq.exists()) {
+			existe = true;
+		}
+		FileWriter abreArq = new FileWriter(arq, existe);
+		PrintWriter escreveArq = new PrintWriter(abreArq);
+		if (arq.exists() && arq.isFile()) {
+			String titulo = "";
+			try {
+				escreveArq.write(titulo+"\r\n");
+				System.out.println();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			escreveArq.flush();
+			escreveArq.close();
+			abreArq.close();
+			}else {
+				throw new IOException("Diretório Inválido");
+			}
+	}
+	public void SalvarSubarea(Area S,JComboBox comboBox) throws Exception {
 		File arq = new File("C:\\TEMP", "Subarea.csv");
 		boolean existe = false;
 		if (arq.exists()) {
@@ -46,9 +70,9 @@ public class Salvar {
 		FileWriter abreArq = new FileWriter(arq, existe);
 		PrintWriter escreveArq = new PrintWriter(abreArq);
 		if (arq.exists() && arq.isFile()) {
-			String titulo = S.getTitulo();
+			String titulo = S.getSubarea();
 			try {
-				escreveArq.write(titulo+"\r\n");
+				escreveArq.write(comboBox.getSelectedItem().toString()+";"+titulo+"\r\n");
 				System.out.println();
 				} catch (Exception e) {
 					e.printStackTrace();

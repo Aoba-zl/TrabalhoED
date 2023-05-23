@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 
 import PilhaObject.PilhaObject;
 import controllerFila.FilaObject;
+import modelObject.ISetObject;
 
 public class Buscar {
 	public PilhaObject buscarAluno(PilhaObject pilhaAluno) throws IOException {
@@ -38,12 +39,31 @@ public class Buscar {
 			String linha = buffer.readLine();
 			while (linha != null) {
 				String[] vetLinha = linha.split(";");
-				filaSub.insert(vetLinha[0]);
+				filaSub.insert(vetLinha[1]);
 				linha = buffer.readLine();
 			}
 			buffer.close();
 			leitorFluxo.close();
 			abreFluxoArq.close();
 		}
+	}
+	public ISetObject buscarArea(ISetObject setArea) throws Exception {
+		File arq = new File("C:\\TEMP", "Subarea.csv");
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream abreFluxoArq = new FileInputStream(arq);
+			InputStreamReader leitorFluxo = new InputStreamReader(abreFluxoArq);
+			BufferedReader buffer = new BufferedReader(leitorFluxo);
+			String linha = buffer.readLine();
+			while (linha != null) {
+				String[	] vetLinha = linha.split(";");
+				setArea.addFirst(vetLinha[0]);
+				linha = buffer.readLine();
+			}
+			buffer.close();
+			leitorFluxo.close();
+			abreFluxoArq.close();
+			return setArea;
+		}
+		return null;
 	}
 }

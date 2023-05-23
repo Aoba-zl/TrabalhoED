@@ -26,7 +26,7 @@ public class TelaPrincipal extends JFrame{
 		int cont = 1;
 		TelaInicial I = new TelaInicial();
 		TelaCadastraAluno CA = new TelaCadastraAluno();
-		TelaCadastraSubarea CS = new TelaCadastraSubarea();
+		TelaCadastraArea CS = new TelaCadastraArea();
 		TelaCadastrarGrupos CG = new TelaCadastrarGrupos();
 		TelaCadastrarOrientacao CO = new TelaCadastrarOrientacao();
 		TelaConsultaGrupos CONG = new TelaConsultaGrupos ();

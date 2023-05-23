@@ -15,12 +15,18 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import model.Aluno;
+import telaController.ControllerTelaCadastraAluno;
 
 public class TelaCadastraAluno {
 	private JTextField textFieldNome;
 	private JTextField textFieldRA;
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public void CadastraAluno(JTabbedPane tabbedPane) {
 		Salvar Save = new Salvar();
+		ControllerTelaCadastraAluno controller = new ControllerTelaCadastraAluno();
+		
 		JPanel Aluno = new JPanel();
 		tabbedPane.addTab("Cadastrar Aluno", null, Aluno, null);
 		Aluno.setLayout(null);
@@ -45,23 +51,7 @@ public class TelaCadastraAluno {
 		JButton btnSalvarAluno = new JButton("Salvar");
 		btnSalvarAluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				Aluno A = new Aluno();
-				A.setNomeA(textFieldNome.getText());
-				A.setRA(textFieldRA.getText());
-				if (A.getRA().length() == 13 && A.getNomeA().length() > 1) {
-					try {
-						Save.SalvarAluno(A);
-						textFieldNome.setText("");
-						textFieldRA.setText("");
-					} catch (Exception e1) {
-						e1.printStackTrace();	
-					}
-				}else if (A.getRA().length()!=13) {
-					JOptionPane.showMessageDialog(null, "O RA deve conter exatos 13 digitos");
-				}else {
-					JOptionPane.showMessageDialog(null, "As areas devem ser preenchidas");
-				}
+				controller.btnSalvarAluno(textFieldNome, textFieldRA);
 			}
 		});
 		btnSalvarAluno.setFont(new Font("Tahoma", Font.BOLD, 18));
