@@ -27,6 +27,7 @@ import controller.Buscar;
 import controller.Salvar;
 import controllerFila.FilaObject;
 import model.Grupo;
+import telaController.ControllerCadastrarGrupos;
 import telaController.Listas;
 import telaController.SelecionaAluno;
 
@@ -60,8 +61,10 @@ public class TelaCadastrarGrupos {
 	 * @wbp.parser.entryPoint
 	 */
 	public void cadastrarGrupos(JTabbedPane tabbedPane) {
+		ControllerCadastrarGrupos controll = new ControllerCadastrarGrupos();
 		Listas geraListaAluno = new Listas();
 		Grupo grupo = new Grupo();
+		Buscar B = new Buscar();
 		JPanel Grupo = new JPanel();
 		tabbedPane.addTab("Cadastrar Grupos", null, Grupo, null);
 		Grupo.setLayout(null);
@@ -84,14 +87,10 @@ public class TelaCadastrarGrupos {
 		chckbx1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chckbx1.isSelected()) {
-					selecionar(true,false,false,false);
-					chckbx2.setSelected(false);
-					chckbx3.setSelected(false);
-					chckbx4.setSelected(false);
-					grupo.setQuantidade(1);
+					grupo.setQuantidade(controll.quantidade(chckbx1,textAluno1, btnAluno1, true,chckbx2,textAluno2, btnAluno2, false,chckbx3,textAluno3, btnAluno3, false,chckbx4,textAluno4, btnAluno4, false));
+					
 				}else {
-					selecionar(false,false,false,false);
-					grupo.setQuantidade(0);
+					grupo.setQuantidade(controll.quantidade(chckbx1,textAluno1, btnAluno1, false,chckbx2,textAluno2, btnAluno2, false,chckbx3,textAluno3, btnAluno3, false,chckbx4,textAluno4, btnAluno4, false));
 				}
 			}
 		});
@@ -102,14 +101,9 @@ public class TelaCadastrarGrupos {
 		chckbx2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chckbx2.isSelected()) {
-					selecionar(true,true,false,false);
-					chckbx1.setSelected(false);
-					chckbx3.setSelected(false);
-					chckbx4.setSelected(false);
-					grupo.setQuantidade(2);
+					grupo.setQuantidade(controll.quantidade(chckbx1,textAluno1, btnAluno1, false,chckbx2,textAluno2, btnAluno2,  true,chckbx3,textAluno3, btnAluno3, false,chckbx4,textAluno4, btnAluno4, false));
 				}else {
-					selecionar(false,false,false,false);
-					grupo.setQuantidade(0);
+					grupo.setQuantidade(controll.quantidade(chckbx1,textAluno1, btnAluno1, false,chckbx2,textAluno2, btnAluno2, false,chckbx3,textAluno3, btnAluno3, false,chckbx4,textAluno4, btnAluno4, false));
 				}
 			}
 		});
@@ -120,14 +114,9 @@ public class TelaCadastrarGrupos {
 		chckbx3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chckbx3.isSelected()) {
-					selecionar(true,true,true,false);
-					chckbx1.setSelected(false);
-					chckbx2.setSelected(false);
-					chckbx4.setSelected(false);
-					grupo.setQuantidade(3);
+					grupo.setQuantidade(controll.quantidade(chckbx1,textAluno1, btnAluno1, false,chckbx2,textAluno2, btnAluno2, false,chckbx3,textAluno3, btnAluno3,  true,chckbx4,textAluno4, btnAluno4, false));
 				}else {
-					selecionar(false,false,false,false);
-					grupo.setQuantidade(0);
+					grupo.setQuantidade(controll.quantidade(chckbx1,textAluno1, btnAluno1, false,chckbx2,textAluno2, btnAluno2, false,chckbx3,textAluno3, btnAluno3, false,chckbx4,textAluno4, btnAluno4, false));
 				}
 			}
 		});
@@ -138,14 +127,9 @@ public class TelaCadastrarGrupos {
 		chckbx4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chckbx4.isSelected()) {
-					selecionar(true,true,true,true);
-					chckbx1.setSelected(false);
-					chckbx2.setSelected(false);
-					chckbx3.setSelected(false);
-					grupo.setQuantidade(4);
+					grupo.setQuantidade(controll.quantidade(chckbx1,textAluno1, btnAluno1, false,chckbx2,textAluno2, btnAluno2, false,chckbx3,textAluno3, btnAluno3, false,chckbx4,textAluno4, btnAluno4,  true));
 				}else {
-					selecionar(false,false,false,false);
-					grupo.setQuantidade(0);
+					grupo.setQuantidade(controll.quantidade(chckbx1,textAluno1, btnAluno1, false,chckbx2,textAluno2, btnAluno2, false,chckbx3,textAluno3, btnAluno3, false,chckbx4,textAluno4, btnAluno4, false));
 				}
 			}
 		});
@@ -245,31 +229,31 @@ public class TelaCadastrarGrupos {
 		panelGrupo_1.add(separator_1);
 		
 		JLabel lblSubareaG = new JLabel("Subárea:");
-		lblSubareaG.setBounds(361, 7, 253, 23);
+		lblSubareaG.setBounds(361, 24, 253, 23);
 		lblSubareaG.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSubareaG.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelGrupo_1.add(lblSubareaG);
 		
 		JLabel lblTema = new JLabel("Tema:");
-		lblTema.setBounds(361, 80, 253, 23);
+		lblTema.setBounds(361, 91, 253, 23);
 		lblTema.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTema.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelGrupo_1.add(lblTema);
 		
 		textTema = new JTextField();
-		textTema.setBounds(361, 114, 253, 20);
+		textTema.setBounds(361, 125, 253, 20);
 		
 		textTema.setColumns(10);
 		panelGrupo_1.add(textTema);
 		
 		JLabel lblID = new JLabel("ID:");
-		lblID.setBounds(361, 145, 253, 23);
+		lblID.setBounds(361, 156, 253, 23);
 		lblID.setHorizontalAlignment(SwingConstants.CENTER);
 		lblID.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panelGrupo_1.add(lblID);
 		
 		textFieldID = new JTextField();
-		textFieldID.setBounds(361, 171, 253, 20);
+		textFieldID.setBounds(361, 186, 253, 20);
 		textFieldID.setEditable(false);
 		textFieldID.setColumns(10);
 		panelGrupo_1.add(textFieldID);
@@ -279,26 +263,7 @@ public class TelaCadastrarGrupos {
 		btnSalvarGrupo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				grupo.setTema(textTema.getText());
-				Salvar save = new Salvar();
-				JTextField[] Vt = {textAluno1,textAluno2,textAluno3,textAluno4};
-				if (grupo.getQuantidade() !=0 && grupo.getID() != 00 && grupo.getTema().length()>1) {
-					try {
-						save.SalvarGrupo(grupo,comboBox.getSelectedItem().toString(),Vt);
-						textAluno1.setText("");
-						textAluno2.setText("");
-						textAluno3.setText("");
-						textAluno4.setText("");
-						textTema.setText("");
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}else if (grupo.getQuantidade() == 0) {
-					JOptionPane.showMessageDialog(null, "Deve-se selelecionar a quantidade do grupo");
-				}else if (grupo.getID() == 00) {
-					JOptionPane.showMessageDialog(null, "Deve-se selelecionar uma subárea");
-				}else {
-					JOptionPane.showMessageDialog(null, "Deve-se escrever o tema");
-				}
+				controll.salvar(grupo,textAluno1,textAluno2,textAluno3,textAluno4,textTema,comboBox);
 			}
 		});
 		btnSalvarGrupo.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -310,20 +275,11 @@ public class TelaCadastrarGrupos {
 		
 		comboBox = new JComboBox();
 		comboBox.setMaximumRowCount(999999);
-		comboBox.setBounds(361, 43, 253, 22);
+		comboBox.setBounds(361, 58, 253, 22);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"   "}));
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					grupo.setID(comboBox.getSelectedItem().toString());
-					if (grupo.getID() < 10) {
-						textFieldID.setText("0"+grupo.getID());
-					}else {
-						textFieldID.setText(grupo.getID()+"");
-					}
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+				controll.iD(grupo,comboBox,textFieldID,B);
 			}
 		});
 			Buscar buscaSub = new Buscar();
@@ -350,11 +306,8 @@ public class TelaCadastrarGrupos {
 		btnVoltar.setEnabled(false);
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelGrupo_1.setVisible(true);
-				btnBuscar.setEnabled(false);
-				btnVoltar.setEnabled(false);
-				list.setEnabled(false);
-				scrollPane.setEnabled(false);
+				controll.voltar(panelGrupo_1,btnBuscar,btnVoltar,list,scrollPane);
+				
 			}
 		});
 		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -364,14 +317,8 @@ public class TelaCadastrarGrupos {
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SelecionaAluno seleciona = new SelecionaAluno();
-				textoAluno.setText(seleciona.nomeAluno(list.getSelectedValue().toString()));
-				panelGrupo_1.setVisible(true);
-				btnBuscar.setEnabled(false);
-				btnBuscar.setVisible(false);
-				btnVoltar.setEnabled(false);
-				list.setEnabled(false);
-				scrollPane.setEnabled(false);
+				controll.buscar(textoAluno,list);
+				controll.voltar(panelGrupo_1,btnBuscar,btnVoltar,list,scrollPane);
 			}
 		});
 		btnBuscar.setEnabled(false);
@@ -390,16 +337,6 @@ public class TelaCadastrarGrupos {
 		scrollPane.setViewportView(list);
 		list.setVisibleRowCount(9999);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	}
-	private void selecionar(boolean a,boolean b,boolean c,boolean d) {
-		textAluno1.setVisible(a);;
-		textAluno2.setVisible(b);
-		textAluno3.setVisible(c);
-		textAluno4.setVisible(d);
-		btnAluno1.setVisible(a);
-		btnAluno2.setVisible(b);
-		btnAluno3.setVisible(c);
-		btnAluno4.setVisible(d);
 	}
 	private void adiciona(FilaObject filaSub) {
 
@@ -422,7 +359,7 @@ public class TelaCadastrarGrupos {
 		panelGrupo_1.setEnabled(false);
 		btnBuscar.setEnabled(true);
 		btnVoltar.setEnabled(true);
-		list.setEnabled(true);
+		list.setEnabled(true);	
 		btnBuscar.setVisible(true);
 	}
 }
