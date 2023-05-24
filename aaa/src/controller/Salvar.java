@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 import model.*;
 
-public class Salvar {
+public class Salvar implements ISalvar {
 	public void SalvarAluno(Aluno A) throws Exception {
 		File arq = new File("C:\\TEMP", "Aluno.csv");
 		boolean existe = false;
@@ -27,29 +27,6 @@ public class Salvar {
 			String RA = A.getRA();
 			try {
 				escreveArq.write(nome+";"+RA+"\r\n");
-				System.out.println();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			escreveArq.flush();
-			escreveArq.close();
-			abreArq.close();
-			}else {
-				throw new IOException("Diretório Inválido");
-			}
-	}
-	public void SalvarArea() throws IOException {
-		File arq = new File("C:\\TEMP", "Area.csv");
-		boolean existe = false;
-		if (arq.exists()) {
-			existe = true;
-		}
-		FileWriter abreArq = new FileWriter(arq, existe);
-		PrintWriter escreveArq = new PrintWriter(abreArq);
-		if (arq.exists() && arq.isFile()) {
-			String titulo = "";
-			try {
-				escreveArq.write(titulo+"\r\n");
 				System.out.println();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -148,5 +125,10 @@ public class Salvar {
 			}else {
 				throw new IOException("Diretório Inválido");
 			}
+	}
+	@Override
+	public void SalvarSubarea(Area S) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

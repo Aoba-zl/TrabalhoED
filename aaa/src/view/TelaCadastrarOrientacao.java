@@ -83,6 +83,17 @@ public class TelaCadastrarOrientacao {
 		textFieldGrupo.setColumns(10);
 		
 		JButton btnGrupo = new JButton("Buscar");
+		btnGrupo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnVoltar.setEnabled(true);
+				btnVoltar.setVisible(true);
+				btnBuscar.setVisible(true);
+				btnBuscar.setEnabled(true);
+				scrollPane.setEnabled(true);
+				list.setEnabled(true);
+				CadastrarOrientaçao.setVisible(false);
+			}
+		});
 		btnGrupo.setBounds(194, 80, 78, 23);
 		CadastrarOrientaçao.add(btnGrupo);
 		
@@ -204,6 +215,7 @@ public class TelaCadastrarOrientacao {
 				CadastrarOrientaçao.setVisible(true);
 				btnBuscar.setEnabled(false);
 				btnVoltar.setEnabled(false);
+				btnVoltar.setVisible(false);
 				list.setEnabled(false);
 				scrollPane.setEnabled(false);
 			}
@@ -232,7 +244,7 @@ public class TelaCadastrarOrientacao {
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setEnabled(false);
-		scrollPane.setBounds(27, 0, 311, 340);
+		scrollPane.setBounds(27, 0, 379, 340);
 		Buscar.add(scrollPane);
 		
 		list = new JList();

@@ -6,13 +6,19 @@ import javax.swing.JComboBox;
 import controller.Salvar;
 import model.Area;
 import modelObject.ISetObject;
+import view.TelaCadastrarGrupos;
 
 public class ControllerTelaCadastraArea {
-	public void SalvarSubarea (JTextPane textPaneSubarea,JComboBox comboBox, ISetObject SetArea) {
+	/**
+	 * @param cG 
+	 * @wbp.parser.entryPoint
+	 */
+	public void SalvarSubarea (JTextPane textPaneSubarea,JComboBox comboBox, ISetObject SetArea, TelaCadastrarGrupos cG)  {
 		Salvar Save = new Salvar();
 		Area Sub = new Area();
 		Sub.setSubarea(textPaneSubarea.getText());
 		if (Sub.getSubarea().length() >= 1 && comboBox.getSelectedItem().toString().length() >= 1) {
+			cG.comboBox.addItem(textPaneSubarea.getText());
 			try {
 				int tam = SetArea.size();
 				SetArea.addFirst(comboBox.getSelectedItem());

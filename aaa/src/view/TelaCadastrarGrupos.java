@@ -52,7 +52,7 @@ public class TelaCadastrarGrupos {
 	protected JList list;
 	private JTextField textTema;
 	private JTextField textFieldID;
-	protected JComboBox comboBox;
+	public JComboBox comboBox;
 	private JPanel Buscar;
 	private JScrollPane scrollPane;
 
@@ -264,6 +264,7 @@ public class TelaCadastrarGrupos {
 			public void actionPerformed(ActionEvent e) {
 				grupo.setTema(textTema.getText());
 				controll.salvar(grupo,textAluno1,textAluno2,textAluno3,textAluno4,textTema,comboBox);
+				comboBox.setSelectedIndex(comboBox.getSelectedIndex());
 			}
 		});
 		btnSalvarGrupo.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -282,14 +283,7 @@ public class TelaCadastrarGrupos {
 				controll.iD(grupo,comboBox,textFieldID,B);
 			}
 		});
-			Buscar buscaSub = new Buscar();
-			FilaObject filaSub = new FilaObject();
-			try {
-				buscaSub.buscarSubarea(filaSub);
-				adiciona(filaSub);
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+		addBox();
 
 			
 		panelGrupo_1.add(comboBox);
@@ -361,5 +355,15 @@ public class TelaCadastrarGrupos {
 		btnVoltar.setEnabled(true);
 		list.setEnabled(true);	
 		btnBuscar.setVisible(true);
+	}
+	public void addBox() {
+		Buscar buscaSub = new Buscar();
+		FilaObject filaSub = new FilaObject();
+		try {
+			buscaSub.buscarSubarea(filaSub);
+			adiciona(filaSub);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
 	}
 }

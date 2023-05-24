@@ -40,8 +40,10 @@ public class Grupo {
 		busca.buscarSubarea(fila);
 		int id=0;
 		while (!fila.filaVazia()) {
-			id++;
 			String topo = (String) fila.remove();
+			if(topo !=("") && topo!=(" ") && topo!=(null)) {
+				id++;
+			}
 			if (topo.contains(subarea)) {
 				break;
 			}else if (subarea == "   ") {

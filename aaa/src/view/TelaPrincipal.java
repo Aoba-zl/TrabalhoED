@@ -43,7 +43,7 @@ public class TelaPrincipal extends JFrame{
 		contentPane.add(tabbedPane);
 		I.Inicial(tabbedPane);
 		CA.CadastraAluno(tabbedPane);
-		CS.cadastraSubarea(tabbedPane);
+		CS.cadastraSubarea(tabbedPane,CG);
 		CG.cadastrarGrupos(tabbedPane);
 		CO.cadastrarOrientacao(tabbedPane);
 		CONG.TelaConsulta(tabbedPane);

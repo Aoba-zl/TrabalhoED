@@ -66,4 +66,7 @@ public class Buscar {
 		}
 		return null;
 	}
+	public void buscarGrupo () {
+		
+	}
 }

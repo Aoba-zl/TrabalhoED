@@ -23,11 +23,12 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 // COMBOBOX NAO ATUALIZA SOZINHO MAIS!!!!! ATUALIZAR
 public class TelaCadastraArea {
-	private JComboBox comboBoxArea;
+	private JComboBox<String> comboBoxArea;
 	/**
+	 * @param cG 
 	 * @wbp.parser.entryPoint
 	 */
-	public void cadastraSubarea(JTabbedPane tabbedPane) {
+	public void cadastraSubarea(JTabbedPane tabbedPane, TelaCadastrarGrupos cG) {
 		Buscar B = new Buscar();
 		ControllerTelaCadastraArea controller = new ControllerTelaCadastraArea();
 		ISetObject SetArea = new SetObject();
@@ -61,7 +62,8 @@ public class TelaCadastraArea {
 		btnSalvarSubarea.setBounds(392, 246, 177, 56);
 		btnSalvarSubarea.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.SalvarSubarea(textPaneSubarea,comboBoxArea,SetArea);
+				controller.SalvarSubarea(textPaneSubarea,comboBoxArea,SetArea,cG);
+				
 			}
 		});
 		adiciona(SetArea);
@@ -78,14 +80,12 @@ public class TelaCadastraArea {
 		lblArea.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblArea.setBounds(10, 43, 91, 49);
 		Subarea.add(lblArea);
-		
-		
 	}
 	private void adiciona(ISetObject setArea) {
 		int tam = setArea.size();
 		for(int J=0; J<tam; J++){
 			try {
-				comboBoxArea.addItem(setArea.get(J));
+				comboBoxArea.addItem(setArea.get(J).toString());
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
