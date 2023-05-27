@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import model.*;
 
-public class Salvar {
+public class Salvar implements ISalvar {
 	public void SalvarAluno(Aluno A) throws Exception {
 		File arq = new File("C:\\TEMP", "Aluno.csv");
 		boolean existe = false;
@@ -37,7 +38,7 @@ public class Salvar {
 				throw new IOException("Diretório Inválido");
 			}
 	}
-	public void SalvarSubarea(Subarea S) throws Exception {
+	public void SalvarSubarea(Area S,JComboBox comboBox) throws Exception {
 		File arq = new File("C:\\TEMP", "Subarea.csv");
 		boolean existe = false;
 		if (arq.exists()) {
@@ -46,9 +47,9 @@ public class Salvar {
 		FileWriter abreArq = new FileWriter(arq, existe);
 		PrintWriter escreveArq = new PrintWriter(abreArq);
 		if (arq.exists() && arq.isFile()) {
-			String titulo = S.getTitulo();
+			String titulo = S.getSubarea();
 			try {
-				escreveArq.write(titulo+"\r\n");
+				escreveArq.write(comboBox.getSelectedItem().toString()+";"+titulo+"\r\n");
 				System.out.println();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +61,7 @@ public class Salvar {
 				throw new IOException("Diretório Inválido");
 			}
 	}
-	public void SalvarGrupo (Grupo grupo, String subarea, JTextField[] vt) throws IOException {
+	public void SalvarGrupo (Grupo grupo, String subarea, JTextField[] vt, JTextField textFieldID) throws IOException {
 		String nomeGrupo = grupo.getID()+"Grupo.csv";
 		File arq = new File("C:\\TEMP", nomeGrupo);
 		boolean Campo = false;
@@ -85,8 +86,11 @@ public class Salvar {
 			PrintWriter escreveArq = new PrintWriter(abreArq);
 			if (arq.exists() && arq.isFile()) {
 				try {
-					escreveArq.write(grupo.getTema()+";"+subarea+";"+grupo.getID()+";"+grupo.getQuantidade()+nomes+"\r\n");
-					System.out.println();
+					if (textFieldID.getText().length() == 4) {
+						escreveArq.write(grupo.getTema()+";"+subarea+";"+textFieldID.getText().charAt(2)+""+textFieldID.getText().charAt(3)+";"+grupo.getQuantidade()+nomes+"\r\n");
+					}else {
+						escreveArq.write(grupo.getTema()+";"+subarea+";"+textFieldID.getText().charAt(2)+";"+grupo.getQuantidade()+nomes+"\r\n");
+					}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

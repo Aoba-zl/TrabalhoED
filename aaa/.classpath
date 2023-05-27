@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="src/libs/PilhaObject.jar"/>
 	<classpathentry kind="lib" path="src/libs/PilhaJCheckBox.jar"/>
 	<classpathentry kind="lib" path="src/libs/PilhaJTextField.jar"/>
+	<classpathentry kind="lib" path="src/libs/FilaObject.jar"/>
+	<classpathentry kind="lib" path="src/libs/SetObject.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
