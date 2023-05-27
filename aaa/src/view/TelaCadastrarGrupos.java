@@ -263,7 +263,7 @@ public class TelaCadastrarGrupos {
 		btnSalvarGrupo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				grupo.setTema(textTema.getText());
-				controll.salvar(grupo,textAluno1,textAluno2,textAluno3,textAluno4,textTema,comboBox);
+				controll.salvar(grupo,textAluno1,textAluno2,textAluno3,textAluno4,textTema,comboBox,textFieldID);
 				comboBox.setSelectedIndex(comboBox.getSelectedIndex());
 			}
 		});

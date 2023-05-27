@@ -52,12 +52,12 @@ public class ControllerCadastrarGrupos {
 			btnAluno4.setVisible(d);
 			return cont;
 	}
-	public void salvar (Grupo grupo, JTextField textAluno1, JTextField textAluno2, JTextField textAluno3, JTextField textAluno4, JTextField textTema, JComboBox comboBox) {
+	public void salvar (Grupo grupo, JTextField textAluno1, JTextField textAluno2, JTextField textAluno3, JTextField textAluno4, JTextField textTema, JComboBox comboBox, JTextField textFieldID) {
 		Salvar save = new Salvar();
 		JTextField[] vt = {textAluno1,textAluno2,textAluno3,textAluno4};
 		if (grupo.getQuantidade() !=0 && grupo.getID() != 00 && grupo.getTema().length()>1) {
 			try {
-				save.SalvarGrupo(grupo,comboBox.getSelectedItem().toString(),vt);
+				save.SalvarGrupo(grupo,comboBox.getSelectedItem().toString(),vt,textFieldID);
 				textAluno1.setText("");
 				textAluno2.setText("");
 				textAluno3.setText("");

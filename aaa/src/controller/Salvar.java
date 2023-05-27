@@ -61,7 +61,7 @@ public class Salvar implements ISalvar {
 				throw new IOException("Diretório Inválido");
 			}
 	}
-	public void SalvarGrupo (Grupo grupo, String subarea, JTextField[] vt) throws IOException {
+	public void SalvarGrupo (Grupo grupo, String subarea, JTextField[] vt, JTextField textFieldID) throws IOException {
 		String nomeGrupo = grupo.getID()+"Grupo.csv";
 		File arq = new File("C:\\TEMP", nomeGrupo);
 		boolean Campo = false;
@@ -86,8 +86,11 @@ public class Salvar implements ISalvar {
 			PrintWriter escreveArq = new PrintWriter(abreArq);
 			if (arq.exists() && arq.isFile()) {
 				try {
-					escreveArq.write(grupo.getTema()+";"+subarea+";"+grupo.getID()+";"+grupo.getQuantidade()+nomes+"\r\n");
-					System.out.println();
+					if (textFieldID.getText().length() == 4) {
+						escreveArq.write(grupo.getTema()+";"+subarea+";"+textFieldID.getText().charAt(2)+""+textFieldID.getText().charAt(3)+";"+grupo.getQuantidade()+nomes+"\r\n");
+					}else {
+						escreveArq.write(grupo.getTema()+";"+subarea+";"+textFieldID.getText().charAt(2)+";"+grupo.getQuantidade()+nomes+"\r\n");
+					}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -125,10 +128,5 @@ public class Salvar implements ISalvar {
 			}else {
 				throw new IOException("Diretório Inválido");
 			}
-	}
-	@Override
-	public void SalvarSubarea(Area S) throws Exception {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -9,12 +9,12 @@ import controller.Buscar;
 public class Listas {
 	public void listaAluno(JList list) throws Exception {
 		int cont = 0;
-		PilhaObject auno = new PilhaObject();
+		PilhaObject aluno = new PilhaObject();
 		Buscar busca = new Buscar();
-		auno = busca.buscarAluno(auno);
+		aluno = busca.buscarAluno(aluno);
 		DefaultListModel DLM = new DefaultListModel();
-		while(!auno.isEmpty()) {
-			DLM.addElement("RA:"+auno.pop()+";"+"Aluno:"+auno.pop());
+		while(!aluno.isEmpty()) {
+			DLM.addElement("RA:"+aluno.pop()+";"+"Aluno:"+aluno.pop());
 			cont ++;
 		}
 		list.setModel(DLM);

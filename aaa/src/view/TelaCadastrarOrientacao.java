@@ -181,7 +181,7 @@ public class TelaCadastrarOrientacao {
 				String[] instrucoes = new String[tam]; 
 				for (int J = 0;J<tam;J++) {
 					try {
-						instrucoes[J] = pilhaField.pop().getText();
+						instrucoes[J] = pilhaField.pop().getText();	
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
