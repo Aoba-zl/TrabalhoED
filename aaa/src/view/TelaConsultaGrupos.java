@@ -42,6 +42,7 @@ public class TelaConsultaGrupos {
 	public void TelaConsulta(JTabbedPane tabbedPane) {
 		FilaObject filaSub = new FilaObject();
 		JPanel Consulta = new JPanel();
+		Buscar B = new Buscar();
 		tabbedPane.addTab("Consulta Grupos", null, Consulta, null);
 		Consulta.setLayout(null);
 		
@@ -183,6 +184,18 @@ public class TelaConsultaGrupos {
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				try {
+					String[] vt = new String[8];
+					if (table.getValueAt(table.getSelectedRow(),0).toString().length()==4) {
+						vt = B.buscarGrupoExpecifico(Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString().charAt(2)+""+table.getValueAt(table.getSelectedRow(),0).toString().charAt(3)), Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString().charAt(0)+""+table.getValueAt(table.getSelectedRow(),0).toString().charAt(1)));
+					}else {
+						vt = B.buscarGrupoExpecifico(Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString().charAt(2)+""),Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString().charAt(0)+""+table.getValueAt(table.getSelectedRow(),0).toString().charAt(1)));
+					}
+					JLabel[] alunos = {lblAluno1,lblAluno2,lblAluno3,lblAluno4};
+					nomeGrupo(vt,alunos);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				lblTemaMostra.setText(table.getValueAt(table.getSelectedRow(),1).toString());
 				lblIDMostra.setText(table.getValueAt(table.getSelectedRow(),0).toString());
 				lblSubareaMostra.setText(table.getValueAt(table.getSelectedRow(),2).toString());
@@ -243,6 +256,15 @@ public class TelaConsultaGrupos {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+	private void nomeGrupo (String[] nomes, JLabel[] alunos) {
+		for(int J=0;J<4;J++) {
+			alunos[J].setText("");
+	}
+		int tam = nomes.length;
+		for(int J=4;J<tam;J++) {
+				alunos[J-4].setText(nomes[J]);
 		}
 	}
 }

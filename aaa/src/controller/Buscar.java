@@ -91,8 +91,8 @@ public class Buscar {
 			abreFluxoArq.close();
 		}
 	}
-	public void buscarGrupoExpecifico (int codGrupo, int codArquivo) throws IOException {
-		String nome = codArquivo+"Grupo.csv";
+	public String[] buscarGrupoExpecifico (int codGrupo, int codArquivo) throws IOException {
+		String nome = codArquivo+1+"Grupo.csv";
 		File arq = new File("C:\\TEMP", nome);
 		if (arq.exists() && arq.isFile()) {
 			FileInputStream abreFluxoArq = new FileInputStream(arq);
@@ -102,7 +102,7 @@ public class Buscar {
 			while (linha != null) {
 				String[] vetLinha = linha.split(";");
 				if(Integer.parseInt(vetLinha[2]) == codGrupo) {
-					
+					return vetLinha;
 				}
 				linha = buffer.readLine();
 			}
@@ -110,5 +110,6 @@ public class Buscar {
 			leitorFluxo.close();
 			abreFluxoArq.close();
 		}
+		return null;
 	}
 }
