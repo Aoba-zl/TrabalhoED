@@ -26,8 +26,9 @@ import PilhaTextField.PilhaTextField;
 import controller.Salvar;
 import model.Orientaçoes;
 import telaController.AdicionarTela;
-import telaController.SelecionaAluno;
-
+import telaController.Listas;
+import telaController.Seleciona;
+import telaController.Listas;
 public class TelaCadastrarOrientacao {
 	private JTextField textFieldData; 
 	private PilhaJ pilhaRdbtn = new PilhaJ();
@@ -47,6 +48,7 @@ public class TelaCadastrarOrientacao {
 	 */
 	public void cadastrarOrientacao(JTabbedPane tabbedPane) {
 		JPanel Orientacoes = new JPanel();
+		Listas geraListaAluno = new Listas();
 		tabbedPane.addTab("Cadastrar Orientações", null, Orientacoes, null);
 		Orientacoes.setLayout(null);
 		
@@ -78,6 +80,7 @@ public class TelaCadastrarOrientacao {
 		lblGrupo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		textFieldGrupo = new JTextField();
+		textFieldGrupo.setEditable(false);
 		textFieldGrupo.setBounds(0, 81, 190, 20);
 		CadastrarOrientaçao.add(textFieldGrupo);
 		textFieldGrupo.setColumns(10);
@@ -85,6 +88,7 @@ public class TelaCadastrarOrientacao {
 		JButton btnGrupo = new JButton("Buscar");
 		btnGrupo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				geraLista(textFieldGrupo,geraListaAluno);
 				btnVoltar.setEnabled(true);
 				btnVoltar.setVisible(true);
 				btnBuscar.setVisible(true);
@@ -172,24 +176,54 @@ public class TelaCadastrarOrientacao {
 		CadastrarOrientaçao.add(btnSalvarOrientacao);
 		btnSalvarOrientacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Salvar SalvarOrientacao = new Salvar();
-				try {
-				Orientaçoes orientacao = new Orientaçoes();
-				orientacao.setData(Integer.parseInt(textFieldData.getText()));
-				orientacao.setDescricao(textArea.getText());
-				int tam = pilhaField.size();
-				String[] instrucoes = new String[tam]; 
-				for (int J = 0;J<tam;J++) {
+					if (local>0 && textFieldData.getText().length() == 8 && textArea.getText().length() >0 && textFieldGrupo.getText().length() > 0) {
+					Salvar SalvarOrientacao = new Salvar();
 					try {
-						instrucoes[J] = pilhaField.pop().getText();	
+					Orientaçoes orientacao = new Orientaçoes();
+					orientacao.setData(Integer.parseInt(textFieldData.getText()));
+					orientacao.setDescricao(textArea.getText());
+					int tam = pilhaField.size();
+					String[] botao = new String[tam];
+					int cont = 0;
+					for (int J = 0;J<tam;J++) {
+						pilhaRdbtn.top().setVisible(false);
+						
+						if(pilhaRdbtn.top().isSelected()) {
+							botao[cont] = "true";
+						}else {
+							botao[cont] = "false";
+						}
+						panelOrientacao.remove((pilhaRdbtn.pop()));
+						cont++;
+					}
+					String[] instrucoes = new String[tam];
+					
+					for (int J = 0;J<tam;J++) {
+						try {
+							pilhaField.top().setVisible(false);
+							instrucoes[J] = pilhaField.top().getText();
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+						panelOrientacao.remove((pilhaField.pop()));
+					}
+					orientacao.setInstrucoes(instrucoes);
+						local = SalvarOrientacao.SalvarOrientacao(orientacao,textFieldGrupo, botao,panelOrientacao);
+						textFieldData.setText("");
+						textArea.setText("");
+					} catch (IOException e1) {
+						e1.printStackTrace();
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-				}
-				orientacao.setInstrucoes(instrucoes);
-					SalvarOrientacao.SalvarOrientacao(orientacao,textFieldGrupo);
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				}else if (textFieldData.getText().length() != 8){
+					JOptionPane.showMessageDialog(null, "A data deve ter 8 digitos");
+				}else if (local == 0) {
+					JOptionPane.showMessageDialog(null, "Deve-se ter alguma orientação");
+				}else if (textFieldGrupo.getText().length() <= 1) {
+					JOptionPane.showMessageDialog(null, "Deve-se selelecionar um grupo");
+				}else {
+					JOptionPane.showMessageDialog(null, "Deve-se escrever uma descrição");
 				}
 			}
 		});
@@ -227,7 +261,8 @@ public class TelaCadastrarOrientacao {
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SelecionaAluno seleciona = new SelecionaAluno();
+				Seleciona seleciona = new Seleciona();
+				textFieldGrupo.setText(seleciona.idGrupo(list.getSelectedValue().toString()));
 				CadastrarOrientaçao.setVisible(true);
 				btnBuscar.setEnabled(false);
 				btnBuscar.setVisible(false);
@@ -252,5 +287,12 @@ public class TelaCadastrarOrientacao {
 		scrollPane.setViewportView(list);
 		list.setVisibleRowCount(9999);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	}
+	private void geraLista(JTextField textAluno, Listas geraListaGrupo) {
+		try {
+			geraListaGrupo.listaGrupo(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

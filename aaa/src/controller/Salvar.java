@@ -9,8 +9,10 @@ import java.io.PrintWriter;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import PilhaJCheckBox.PilhaJ;
 import model.*;
 
 public class Salvar implements ISalvar {
@@ -102,12 +104,13 @@ public class Salvar implements ISalvar {
 				}
 		}
 	}
-	public void SalvarOrientacao (Orientaçoes orientacao, JTextField textFieldGrupo) throws IOException {
+	public int SalvarOrientacao (Orientaçoes orientacao, JTextField textFieldGrupo, String[] botao, JPanel panelOrientacao) throws Exception {
 		File arq = new File("C:\\TEMP", "Orientaçoes.csv");
 		int tam = orientacao.getInstruçoes().length;
+		
 		String ori = "";
 		for (int J=0;J<tam;J++) {
-			ori = ori+";"+orientacao.getInstruçoes()[J];
+				ori = ori+";"+botao[J]+";"+orientacao.getInstruçoes()[J];
 		}
 		boolean existe = false;
 		if (arq.exists()) {
@@ -128,5 +131,6 @@ public class Salvar implements ISalvar {
 			}else {
 				throw new IOException("Diretório Inválido");
 			}
+		return 0;
 	}
 }

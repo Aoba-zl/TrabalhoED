@@ -77,9 +77,9 @@ public class Buscar {
 			while (linha != null) {
 				String[] vetLinha = linha.split(";");
 				if (grupo < 10) {
-					filaGrupo.insert("0"+grupo+""+vetLinha[2]);
+					filaGrupo.insert("0"+(grupo+1)+""+vetLinha[2]);
 				}else {
-					filaGrupo.insert(grupo+""+vetLinha[2]);
+					filaGrupo.insert((grupo+1)+""+vetLinha[2]);
 				}
 				filaGrupo.insert(vetLinha[0]);
 				filaGrupo.insert(vetLinha[1]);
@@ -92,7 +92,7 @@ public class Buscar {
 		}
 	}
 	public String[] buscarGrupoExpecifico (int codGrupo, int codArquivo) throws IOException {
-		String nome = codArquivo+1+"Grupo.csv";
+		String nome = codArquivo+"Grupo.csv";
 		File arq = new File("C:\\TEMP", nome);
 		if (arq.exists() && arq.isFile()) {
 			FileInputStream abreFluxoArq = new FileInputStream(arq);

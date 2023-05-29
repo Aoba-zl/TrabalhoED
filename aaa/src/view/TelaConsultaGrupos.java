@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.Buscar;
 import controllerFila.FilaObject;
+import telaController.Listas;
+
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
@@ -32,8 +34,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class TelaConsultaGrupos {
-	private JTextField textField_1;
-	private JComboBox<Object> comboBox_1;
+	private JTextField textFieldID;
+	private JComboBox<Object> comboBoxSubarea;
 	private JTable table;
 
 	/**
@@ -41,6 +43,7 @@ public class TelaConsultaGrupos {
 	 */
 	public void TelaConsulta(JTabbedPane tabbedPane) {
 		FilaObject filaSub = new FilaObject();
+		Listas geraListaAluno = new Listas();
 		JPanel Consulta = new JPanel();
 		Buscar B = new Buscar();
 		tabbedPane.addTab("Consulta Grupos", null, Consulta, null);
@@ -66,22 +69,34 @@ public class TelaConsultaGrupos {
 		lblId.setBounds(192, 28, 69, 23);
 		Consulta.add(lblId);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(241, 28, 98, 23);
-		Consulta.add(textField_1);
-		
-		comboBox_1 = new JComboBox<Object>();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {" "}));
-		comboBox_1.setMaximumRowCount(9999);
-		comboBox_1.addActionListener(new ActionListener() {
+		textFieldID = new JTextField();
+		textFieldID.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String sub = "";
+				sub = comboBoxSubarea.getSelectedItem().toString();
 				
+				addTable(table,sub,textFieldID.getText().toString());
+			}
+		});
+		textFieldID.setColumns(10);
+		textFieldID.setBounds(241, 28, 98, 23);
+		Consulta.add(textFieldID);
+		
+		comboBoxSubarea = new JComboBox<Object>();
+		comboBoxSubarea.setModel(new DefaultComboBoxModel(new String[] {" \t "}));
+		comboBoxSubarea.setMaximumRowCount(9999);
+		comboBoxSubarea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String sub = "";
+				String id = "";
+					sub = comboBoxSubarea.getSelectedItem().toString();
+					id = textFieldID.getText().toString();
+				addTable(table,sub,id);
 			}
 		});
 		adiciona(filaSub);
-		comboBox_1.setBounds(71, 29, 131, 22);
-		Consulta.add(comboBox_1);
+		comboBoxSubarea.setBounds(71, 29, 131, 22);
+		Consulta.add(comboBoxSubarea);
 		addBox();
 		
 		JSeparator separator_3 = new JSeparator();
@@ -210,13 +225,13 @@ public class TelaConsultaGrupos {
 		));
 		
 		scrollPane_3.setViewportView(table);
-		addTable(table);
+		addTable(table,"","");
 	}
 	private void adiciona(FilaObject filaSub) {
 
 		while (!filaSub.filaVazia()) {
 			try {
-				comboBox_1.addItem(filaSub.remove());;
+				comboBoxSubarea.addItem(filaSub.remove());;
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -228,30 +243,43 @@ public class TelaConsultaGrupos {
 		try {
 			buscaSub.buscarSubarea(filaSub);
 			adiciona(filaSub);
-		} catch (Exception e2) {
+		} catch (Exception e2) {	
 			e2.printStackTrace();
 		}
 	}
-	private void addTable(JTable table) {
+	private void addTable(JTable table,String sub, String ID) {
 		DefaultTableModel model =(DefaultTableModel) table.getModel();
 		FilaObject filaGrupo = new FilaObject();
 		Buscar busca = new Buscar();
 		FilaObject filaSub = new FilaObject();
+		int tam = model.getRowCount();
+		for (int J=0; J<tam;J++) {
+			model.removeRow(0);
+		}
 		try {
 			busca.buscarSubarea(filaSub);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int tam = filaSub.size();
+		tam = filaSub.size();
 		for (int J =0;J<tam;J++) {
 			try {
 				busca.buscarGrupo(J,filaGrupo);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			if (sub.contains(" 	 ")) {
+				sub = "";
+			}
 			while (!filaGrupo.filaVazia()) {
 				try {
-					model.addRow(new Object [] {filaGrupo.remove(),filaGrupo.remove(),filaGrupo.remove(),filaGrupo.remove() });
+				String iD = filaGrupo.remove().toString();
+				String tema = filaGrupo.remove().toString();
+				String subArea = filaGrupo.remove().toString();
+				String qnt = filaGrupo.remove().toString();
+				if (iD.contains(ID) && subArea.contains(sub)) {
+						model.addRow(new Object [] {iD,tema,subArea,qnt});
+				}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

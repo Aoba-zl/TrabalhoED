@@ -29,7 +29,7 @@ import controllerFila.FilaObject;
 import model.Grupo;
 import telaController.ControllerCadastrarGrupos;
 import telaController.Listas;
-import telaController.SelecionaAluno;
+import telaController.Seleciona;
 
 
 public class TelaCadastrarGrupos {
