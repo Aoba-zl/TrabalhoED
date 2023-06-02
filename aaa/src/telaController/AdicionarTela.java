@@ -1,5 +1,8 @@
 package telaController;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -17,10 +20,12 @@ public class AdicionarTela {
 		textFieldInstrucao.setColumns(10);
 		textFieldInstrucao.setVisible(false);
 		textFieldInstrucao.setVisible(true);
-		pilhaField.push(textFieldInstrucao);
 		
+		
+		pilhaField.push(textFieldInstrucao);
 		rdbtnInstrucao = new JCheckBox("");
 		rdbtnInstrucao.setBounds(10, local, 21, 23);
+		
 		panel.add(rdbtnInstrucao);
 		pilhaRdbtn.push(rdbtnInstrucao);
 		

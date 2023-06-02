@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 
 import PilhaObject.PilhaObject;
 import controllerFila.FilaObject;
+import listaObject.ListaObject;
 import modelObject.ISetObject;
+
 
 public class Buscar {
 	public PilhaObject buscarAluno(PilhaObject pilhaAluno) throws IOException {
@@ -77,9 +79,9 @@ public class Buscar {
 			while (linha != null) {
 				String[] vetLinha = linha.split(";");
 				if (grupo < 10) {
-					filaGrupo.insert("0"+grupo+""+vetLinha[2]);
+					filaGrupo.insert("0"+(grupo+1)+""+vetLinha[2]);
 				}else {
-					filaGrupo.insert(grupo+""+vetLinha[2]);
+					filaGrupo.insert((grupo+1)+""+vetLinha[2]);
 				}
 				filaGrupo.insert(vetLinha[0]);
 				filaGrupo.insert(vetLinha[1]);
@@ -91,7 +93,7 @@ public class Buscar {
 			abreFluxoArq.close();
 		}
 	}
-	public void buscarGrupoExpecifico (int codGrupo, int codArquivo) throws IOException {
+	public String[] buscarGrupoExpecifico (int codGrupo, int codArquivo) throws IOException {
 		String nome = codArquivo+"Grupo.csv";
 		File arq = new File("C:\\TEMP", nome);
 		if (arq.exists() && arq.isFile()) {
@@ -102,7 +104,49 @@ public class Buscar {
 			while (linha != null) {
 				String[] vetLinha = linha.split(";");
 				if(Integer.parseInt(vetLinha[2]) == codGrupo) {
-					
+					return vetLinha;
+				}
+				linha = buffer.readLine();
+			}
+			buffer.close();
+			leitorFluxo.close();
+			abreFluxoArq.close();
+		}
+		return null;
+	}
+	public void buscarOrientacaoMenosUma (String iD, ListaObject Lista) throws IOException {
+		
+		File arq = new File("C:\\TEMP", "Orientaçoes.csv");
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream abreFluxoArq = new FileInputStream(arq);
+			InputStreamReader leitorFluxo = new InputStreamReader(abreFluxoArq);
+			BufferedReader buffer = new BufferedReader(leitorFluxo);
+			String linha = buffer.readLine();
+			while (linha != null) {
+				String[] vetLinha = linha.split(";");
+				if (!vetLinha[1].contains(iD)) {
+					Lista.addFirst(linha);
+				}
+				linha = buffer.readLine();
+			}
+			buffer.close();
+			leitorFluxo.close();
+			abreFluxoArq.close();
+		}
+				
+		
+	}
+	public void buscarOrientacaoExpecifica (String iD, ListaObject Lista) throws IOException {
+		File arq = new File("C:\\TEMP", "Orientaçoes.csv");
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream abreFluxoArq = new FileInputStream(arq);
+			InputStreamReader leitorFluxo = new InputStreamReader(abreFluxoArq);
+			BufferedReader buffer = new BufferedReader(leitorFluxo);
+			String linha = buffer.readLine();
+			while (linha != null) {
+				String[] vetLinha = linha.split(";");
+				if (vetLinha[1].contains(iD)) {
+					Lista.addFirst(linha);
 				}
 				linha = buffer.readLine();
 			}

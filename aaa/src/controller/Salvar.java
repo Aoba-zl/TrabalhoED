@@ -9,8 +9,11 @@ import java.io.PrintWriter;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import PilhaJCheckBox.PilhaJ;
+import listaObject.ListaObject;
 import model.*;
 
 public class Salvar implements ISalvar {
@@ -102,12 +105,13 @@ public class Salvar implements ISalvar {
 				}
 		}
 	}
-	public void SalvarOrientacao (Orientaçoes orientacao, JTextField textFieldGrupo) throws IOException {
+	public int SalvarOrientacao (Orientaçoes orientacao, JTextField textFieldGrupo, String[] botao, JPanel panelOrientacao) throws Exception {
 		File arq = new File("C:\\TEMP", "Orientaçoes.csv");
 		int tam = orientacao.getInstruçoes().length;
+		
 		String ori = "";
 		for (int J=0;J<tam;J++) {
-			ori = ori+";"+orientacao.getInstruçoes()[J];
+				ori = ori+";"+botao[J]+";"+orientacao.getInstruçoes()[J];
 		}
 		boolean existe = false;
 		if (arq.exists()) {
@@ -128,5 +132,42 @@ public class Salvar implements ISalvar {
 			}else {
 				throw new IOException("Diretório Inválido");
 			}
+		return 0;
+	}
+	public void SalvarOrientacaoConsulta (String iD ,ListaObject ListaNova) throws Exception {
+		ListaObject Lista = new ListaObject();
+		File nome = new File("C:\\TEMP", "Orientaçoes.csv");
+		Buscar B = new Buscar();
+		B.buscarOrientacaoMenosUma(iD, Lista);
+		// Criando novo arquivo
+		File arqNovo = new File("C:\\TEMP", "TempFile.csv");
+		boolean existe = false;
+		if (arqNovo.exists()) {
+			existe = true;
+		}
+		FileWriter abreArq = new FileWriter(arqNovo, existe);
+		PrintWriter escreveArq = new PrintWriter(abreArq);
+		if (arqNovo.exists() && arqNovo.isFile()) {
+			//Passando informação que não são as orientaçoes do id
+			while(!Lista.isEmpty()) {
+				escreveArq.write(Lista.get(0)+"\r\n");
+				Lista.removeFirst();
+			}
+			
+			while(!ListaNova.isEmpty()) {
+				int tam = ListaNova.size();
+				escreveArq.write(ListaNova.get(tam-1)+"\r\n");
+				ListaNova.removeLast();
+			}
+			escreveArq.flush();
+			escreveArq.close();
+			abreArq.close();
+		}
+		//Deletando
+		nome.delete();
+		//Renomeando
+		arqNovo.renameTo(nome);
+		
+		
 	}
 }

@@ -84,7 +84,7 @@ public class ControllerCadastrarGrupos {
 	}
 	
 	public void buscar (JTextField textoAluno, JList list) {
-		SelecionaAluno seleciona = new SelecionaAluno();
+		Seleciona seleciona = new Seleciona();
 		textoAluno.setText(seleciona.nomeAluno(list.getSelectedValue().toString()));
 	}
 	public void iD(Grupo grupo, JComboBox comboBox, JTextField textFieldID, Buscar B) {
