@@ -114,10 +114,9 @@ public class Buscar {
 		}
 		return null;
 	}
-	public void buscarOrientacaoMenosUma (int iD, ListaObject Lista) throws IOException {
+	public void buscarOrientacaoMenosUma (String iD, ListaObject Lista) throws IOException {
 		
-		String iDArq = Integer.toString(iD);
-		File arq = new File("C:\\TEMP", "Orientaçoes");
+		File arq = new File("C:\\TEMP", "Orientaçoes.csv");
 		if (arq.exists() && arq.isFile()) {
 			FileInputStream abreFluxoArq = new FileInputStream(arq);
 			InputStreamReader leitorFluxo = new InputStreamReader(abreFluxoArq);
@@ -125,8 +124,8 @@ public class Buscar {
 			String linha = buffer.readLine();
 			while (linha != null) {
 				String[] vetLinha = linha.split(";");
-				if (!vetLinha[1].contains(iDArq)) {
-					Lista.addFirst(vetLinha);
+				if (!vetLinha[1].contains(iD)) {
+					Lista.addFirst(linha);
 				}
 				linha = buffer.readLine();
 			}

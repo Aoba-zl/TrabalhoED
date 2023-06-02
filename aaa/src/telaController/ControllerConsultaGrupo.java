@@ -11,7 +11,7 @@ import controller.Salvar;
 import listaObject.ListaObject;
 
 public class ControllerConsultaGrupo {
-	public void salvar(int iD,ListaObject listaNova) {
+	public void salvar(String iD,ListaObject listaNova) {
 		Salvar S = new Salvar();
 		try {
 			S.SalvarOrientacaoConsulta(iD, listaNova);
@@ -19,10 +19,11 @@ public class ControllerConsultaGrupo {
 			e.printStackTrace();
 		}
 	}
-	public void selecionaOrientacao (JLabel lblDataView, JLabel lblIDMostra, ListaObject lista, JTextPane textPaneDescricao, int cont, JLabel[] labels, JCheckBox[] checkBox) throws Exception {
+	public void selecionaOrientacao (JLabel lblDataView, JLabel lblIDMostra, ListaObject lista, JTextPane textPaneDescricao, int cont, JLabel[] labels, JCheckBox[] checkBox,int Perm) throws Exception {
 		Buscar B = new Buscar();
-		B.buscarOrientacaoExpecifica(lblIDMostra.getText(), lista);
-		
+		if (Perm ==0) {
+			B.buscarOrientacaoExpecifica(lblIDMostra.getText(), lista);
+		}
 		
 		if (!lista.isEmpty()) {
 			
@@ -59,7 +60,7 @@ public class ControllerConsultaGrupo {
 		}
 	}
 	
-	public void ajutaNovaLista (ListaObject listaNova,int cont,int posicao,JCheckBox checkBox) {
+	public void ajustaNovaLista (ListaObject listaNova,int cont,int posicao,JCheckBox checkBox) {
 		
 		try {
 			String[] vetLinha = listaNova.get(cont).toString().split(";");
@@ -75,7 +76,7 @@ public class ControllerConsultaGrupo {
 				juntar = juntar+";"+vetLinha[J];
 			}
 			
-			listaNova.add(juntar, posicao);
+			listaNova.add(juntar, cont);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

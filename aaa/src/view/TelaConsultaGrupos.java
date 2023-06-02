@@ -238,7 +238,7 @@ public class TelaConsultaGrupos {
 		chckbx1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
-				C.ajutaNovaLista(ListaNova,cont,3,chckbx1);
+				C.ajustaNovaLista(ListaNova,cont,3,chckbx1);
 			}
 		});
 		chckbx1.setVisible(false);
@@ -252,6 +252,12 @@ public class TelaConsultaGrupos {
 		panelBox.add(lbl1);
 		
 		JCheckBox chckbx2 = new JCheckBox("");
+		chckbx2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,5,chckbx2);
+			}
+		});
 		chckbx2.setVisible(false);
 		chckbx2.setBounds(6, 33, 21, 23);
 		panelBox.add(chckbx2);
@@ -263,41 +269,89 @@ public class TelaConsultaGrupos {
 		panelBox.add(lbl2);
 		
 		JCheckBox chckbx3 = new JCheckBox("");
+		chckbx3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,7,chckbx3);
+			}
+		});
 		chckbx3.setVisible(false);
 		chckbx3.setBounds(6, 59, 21, 23);
 		panelBox.add(chckbx3);
 		
 		JCheckBox chckbx4 = new JCheckBox("");
+		chckbx4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,9,chckbx4);
+			}
+		});
 		chckbx4.setVisible(false);
 		chckbx4.setBounds(6, 85, 21, 23);
 		panelBox.add(chckbx4);
 		
 		JCheckBox chckbx5 = new JCheckBox("");
+		chckbx5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,11,chckbx5);
+			}
+		});
 		chckbx5.setVisible(false);
 		chckbx5.setBounds(6, 111, 21, 23);
 		panelBox.add(chckbx5);
 		
 		JCheckBox chckbx6 = new JCheckBox("");
+		chckbx6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,13,chckbx6);
+			}
+		});
 		chckbx6.setVisible(false);
 		chckbx6.setBounds(6, 137, 21, 23);
 		panelBox.add(chckbx6);
 		
 		JCheckBox chckbx7 = new JCheckBox("");
+		chckbx7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,15,chckbx7);
+			}
+		});
 		chckbx7.setVisible(false);
 		chckbx7.setBounds(6, 163, 21, 23);
 		panelBox.add(chckbx7);
 		
 		JCheckBox chckbx8 = new JCheckBox("");
+		chckbx8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,17,chckbx8);
+			}
+		});
 		chckbx8.setVisible(false);
 		chckbx8.setBounds(6, 189, 21, 23);
 		panelBox.add(chckbx8);
 		
 		JCheckBox chckbx9 = new JCheckBox("");
+		chckbx9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,19,chckbx9);
+			}
+		});
 		chckbx9.setVisible(false);
 		chckbx9.setBounds(6, 215, 21, 23);
 		panelBox.add(chckbx9);
 		
 		JCheckBox chckbx10 = new JCheckBox("");
+		chckbx10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajustaNovaLista(ListaNova,cont,11,chckbx10);
+			}
+		});
 		chckbx10.setVisible(false);
 		chckbx10.setBounds(6, 241, 21, 23);
 		panelBox.add(chckbx10);
@@ -358,7 +412,7 @@ public class TelaConsultaGrupos {
 		btnSalvarAlteracoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
-				C.salvar(Integer.parseInt(lblIDMostra.toString()),ListaNova);
+				C.salvar(lblIDMostra.getText().toString(),ListaNova);
 			}
 		});
 		btnSalvarAlteracoes.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -392,7 +446,7 @@ public class TelaConsultaGrupos {
 					try {
 						Lista = new ListaObject();
 						ListaNova = new ListaObject();
-						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox);
+						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox,0);
 						ListaNova = Lista;
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -418,7 +472,7 @@ public class TelaConsultaGrupos {
 				try {
 					if (cont >0) {
 						cont--;
-						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox);
+						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox,1);
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -431,10 +485,10 @@ public class TelaConsultaGrupos {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
-				if (cont < Lista.size()) {
+				if (cont < Lista.size()-1) {
 					cont++;
 					try {
-						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox);
+						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox,1);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}

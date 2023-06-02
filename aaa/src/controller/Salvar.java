@@ -134,20 +134,20 @@ public class Salvar implements ISalvar {
 			}
 		return 0;
 	}
-	public void SalvarOrientacaoConsulta (int iD ,ListaObject ListaNova) throws Exception {
+	public void SalvarOrientacaoConsulta (String iD ,ListaObject ListaNova) throws Exception {
 		ListaObject Lista = new ListaObject();
-		String nome = "Orientaçoes.csv";
+		File nome = new File("C:\\TEMP", "Orientaçoes.csv");
 		Buscar B = new Buscar();
 		B.buscarOrientacaoMenosUma(iD, Lista);
 		// Criando novo arquivo
-		File arq = new File("C:\\TEMP", "TempFile.csv");
+		File arqNovo = new File("C:\\TEMP", "TempFile.csv");
 		boolean existe = false;
-		if (arq.exists()) {
+		if (arqNovo.exists()) {
 			existe = true;
 		}
-		FileWriter abreArq = new FileWriter(arq, existe);
+		FileWriter abreArq = new FileWriter(arqNovo, existe);
 		PrintWriter escreveArq = new PrintWriter(abreArq);
-		if (arq.exists() && arq.isFile()) {
+		if (arqNovo.exists() && arqNovo.isFile()) {
 			//Passando informação que não são as orientaçoes do id
 			while(!Lista.isEmpty()) {
 				escreveArq.write(Lista.get(0)+"\r\n");
@@ -161,7 +161,8 @@ public class Salvar implements ISalvar {
 			escreveArq.close();
 			abreArq.close();
 		}
-		
+		nome.delete();
+		arqNovo.renameTo(nome);
 		
 		
 	}
