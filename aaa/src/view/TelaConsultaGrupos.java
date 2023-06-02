@@ -30,11 +30,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JCheckBox;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class TelaConsultaGrupos {
 	private JTextField textFieldID;
 	private JComboBox<Object> comboBoxSubarea;
-	private JTable table;
+	public JTable table;
 	private int cont = 0;
 	private ListaObject Lista = new ListaObject();
 	private ListaObject ListaNova = new ListaObject();
@@ -71,6 +73,19 @@ public class TelaConsultaGrupos {
 		Consulta.add(lblId);
 		
 		textFieldID = new JTextField();
+		textFieldID.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				 if (Character.isWhitespace(c) || Character.isISOControl(c) || Character.isDigit(c))
+	                {
+					 	textFieldID.setEditable(true);
+	                }
+	                else
+	                {
+	                	textFieldID.setEditable(false);
+	                }
+			}
+		});
 		textFieldID.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String sub = "";
@@ -518,7 +533,7 @@ public class TelaConsultaGrupos {
 			e2.printStackTrace();
 		}
 	}
-	private void addTable(JTable table,String sub, String ID) {
+	public void addTable(JTable table,String sub, String ID) {
 		DefaultTableModel model =(DefaultTableModel) table.getModel();
 		FilaObject filaGrupo = new FilaObject();
 		Buscar busca = new Buscar();

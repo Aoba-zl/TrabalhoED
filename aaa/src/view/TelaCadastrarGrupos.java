@@ -30,6 +30,8 @@ import model.Grupo;
 import telaController.ControllerCadastrarGrupos;
 import telaController.Listas;
 import telaController.Seleciona;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 public class TelaCadastrarGrupos {
@@ -58,9 +60,10 @@ public class TelaCadastrarGrupos {
 
 	/**
 	 * 
+	 * @param cONG 
 	 * @wbp.parser.entryPoint
 	 */
-	public void cadastrarGrupos(JTabbedPane tabbedPane) {
+	public void cadastrarGrupos(JTabbedPane tabbedPane, TelaConsultaGrupos cONG) {
 		ControllerCadastrarGrupos controll = new ControllerCadastrarGrupos();
 		Listas geraListaAluno = new Listas();
 		Grupo grupo = new Grupo();
@@ -134,6 +137,7 @@ public class TelaCadastrarGrupos {
 			}
 		});
 		panelGrupo_1.add(chckbx4);
+		
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(309, 0, 1, 340);
@@ -241,6 +245,20 @@ public class TelaCadastrarGrupos {
 		panelGrupo_1.add(lblTema);
 		
 		textTema = new JTextField();
+		textTema.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				 if (Character.isWhitespace(c) || Character.isISOControl(c) || Character.isAlphabetic(c)|| Character.isDigit(c))
+	                {
+					 	textTema.setEditable(true);
+	                }
+	                else
+	                {
+	                	textTema.setEditable(false);
+	                }
+			}
+		});
 		textTema.setBounds(361, 125, 253, 20);
 		
 		textTema.setColumns(10);
@@ -265,6 +283,7 @@ public class TelaCadastrarGrupos {
 				grupo.setTema(textTema.getText());
 				controll.salvar(grupo,textAluno1,textAluno2,textAluno3,textAluno4,textTema,comboBox,textFieldID);
 				comboBox.setSelectedIndex(comboBox.getSelectedIndex());
+				cONG.addTable(cONG.table, "", "");
 			}
 		});
 		btnSalvarGrupo.setFont(new Font("Tahoma", Font.BOLD, 16));

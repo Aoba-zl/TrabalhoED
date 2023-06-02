@@ -153,15 +153,19 @@ public class Salvar implements ISalvar {
 				escreveArq.write(Lista.get(0)+"\r\n");
 				Lista.removeFirst();
 			}
+			
 			while(!ListaNova.isEmpty()) {
-				escreveArq.write(ListaNova.get(0)+"\r\n");
-				ListaNova.removeFirst();
+				int tam = ListaNova.size();
+				escreveArq.write(ListaNova.get(tam-1)+"\r\n");
+				ListaNova.removeLast();
 			}
 			escreveArq.flush();
 			escreveArq.close();
 			abreArq.close();
 		}
+		//Deletando
 		nome.delete();
+		//Renomeando
 		arqNovo.renameTo(nome);
 		
 		

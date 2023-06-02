@@ -29,6 +29,8 @@ import telaController.AdicionarTela;
 import telaController.Listas;
 import telaController.Seleciona;
 import telaController.Listas;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 public class TelaCadastrarOrientacao {
 	private JTextField textFieldData; 
 	private PilhaJ pilhaRdbtn = new PilhaJ();
@@ -63,6 +65,21 @@ public class TelaCadastrarOrientacao {
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		
 		textFieldData = new JTextField();
+		textFieldData.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				String algo = Character.toString(c);
+				 if (Character.isWhitespace(c) || Character.isISOControl(c) || Character.isDigit(c))
+	                {
+					 	textFieldData.setEditable(true);
+	                }
+	                else
+	                {
+	                	textFieldData.setEditable(false);
+	                }
+			}
+		});
 		textFieldData.setBounds(0, 25, 272, 20);
 		CadastrarOrientaçao.add(textFieldData);
 		textFieldData.setColumns(10);
@@ -108,6 +125,21 @@ public class TelaCadastrarOrientacao {
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				String algo = Character.toString(c);
+				 if (Character.isWhitespace(c) || Character.isISOControl(c) || Character.isAlphabetic(c) || !algo.contains(";")  )
+	                {
+					 	textArea.setEditable(true);
+	                }
+	                else
+	                {
+	                	textArea.setEditable(false);
+	                }
+			}
+		});
 		scrollPane_1.setViewportView(textArea);
 		textArea.setWrapStyleWord(true);
 		textArea.setLineWrap(true);

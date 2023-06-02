@@ -21,6 +21,8 @@ import modelObject.SetObject;
 import telaController.ControllerTelaCadastraArea;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 // COMBOBOX NAO ATUALIZA SOZINHO MAIS!!!!! ATUALIZAR
 public class TelaCadastraArea {
 	private JComboBox<String> comboBoxArea;
@@ -49,10 +51,38 @@ public class TelaCadastraArea {
 		Subarea.add(lblSubarea);
 		
 		JTextPane textPaneSubarea = new JTextPane();
+		textPaneSubarea.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textPaneSubarea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				 if (Character.isWhitespace(c) || Character.isISOControl(c) || Character.isAlphabetic(c))
+	                {
+					 	textPaneSubarea.setEditable(true);
+	                }
+	                else
+	                {
+	                	textPaneSubarea.setEditable(false);
+	                }
+			}
+		});
 		textPaneSubarea.setBounds(111, 142, 511, 49);
 		Subarea.add(textPaneSubarea);
 		
 		comboBoxArea = new JComboBox();
+		comboBoxArea.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				 if (Character.isWhitespace(c) || Character.isISOControl(c) || Character.isAlphabetic(c))
+	                {
+					 	comboBoxArea.setEditable(true);
+	                }
+	                else
+	                {
+	                	comboBoxArea.setEditable(false);
+	                }
+			}
+		});
 		comboBoxArea.setModel(new DefaultComboBoxModel(new String[] {" "}));
 		comboBoxArea.setEditable(true);
 		comboBoxArea.setBounds(111, 46, 511, 49);
@@ -71,6 +101,17 @@ public class TelaCadastraArea {
 		Subarea.add(btnSalvarSubarea);
 		
 		JButton btnExcluirSubarea = new JButton("Excluir");
+		btnExcluirSubarea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerTelaCadastraArea C = new ControllerTelaCadastraArea();
+				try {
+					cG.comboBox.removeItemAt(C.btnExcluir(textPaneSubarea.getText()));
+					textPaneSubarea.setText("");
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnExcluirSubarea.setBounds(131, 246, 177, 56);
 		btnExcluirSubarea.setFont(new Font("Tahoma", Font.BOLD, 16));
 		Subarea.add(btnExcluirSubarea);
