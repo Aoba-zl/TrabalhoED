@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import PilhaJCheckBox.PilhaJ;
+import listaObject.ListaObject;
 import model.*;
 
 public class Salvar implements ISalvar {
@@ -132,5 +133,36 @@ public class Salvar implements ISalvar {
 				throw new IOException("Diretório Inválido");
 			}
 		return 0;
+	}
+	public void SalvarOrientacaoConsulta (int iD ,ListaObject ListaNova) throws Exception {
+		ListaObject Lista = new ListaObject();
+		String nome = "Orientaçoes.csv";
+		Buscar B = new Buscar();
+		B.buscarOrientacaoMenosUma(iD, Lista);
+		// Criando novo arquivo
+		File arq = new File("C:\\TEMP", "TempFile.csv");
+		boolean existe = false;
+		if (arq.exists()) {
+			existe = true;
+		}
+		FileWriter abreArq = new FileWriter(arq, existe);
+		PrintWriter escreveArq = new PrintWriter(abreArq);
+		if (arq.exists() && arq.isFile()) {
+			//Passando informação que não são as orientaçoes do id
+			while(!Lista.isEmpty()) {
+				escreveArq.write(Lista.get(0)+"\r\n");
+				Lista.removeFirst();
+			}
+			while(!ListaNova.isEmpty()) {
+				escreveArq.write(ListaNova.get(0)+"\r\n");
+				ListaNova.removeFirst();
+			}
+			escreveArq.flush();
+			escreveArq.close();
+			abreArq.close();
+		}
+		
+		
+		
 	}
 }

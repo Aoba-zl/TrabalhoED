@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 
 import PilhaObject.PilhaObject;
 import controllerFila.FilaObject;
+import listaObject.ListaObject;
 import modelObject.ISetObject;
+
 
 public class Buscar {
 	public PilhaObject buscarAluno(PilhaObject pilhaAluno) throws IOException {
@@ -111,5 +113,47 @@ public class Buscar {
 			abreFluxoArq.close();
 		}
 		return null;
+	}
+	public void buscarOrientacaoMenosUma (int iD, ListaObject Lista) throws IOException {
+		
+		String iDArq = Integer.toString(iD);
+		File arq = new File("C:\\TEMP", "Orientaçoes");
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream abreFluxoArq = new FileInputStream(arq);
+			InputStreamReader leitorFluxo = new InputStreamReader(abreFluxoArq);
+			BufferedReader buffer = new BufferedReader(leitorFluxo);
+			String linha = buffer.readLine();
+			while (linha != null) {
+				String[] vetLinha = linha.split(";");
+				if (!vetLinha[1].contains(iDArq)) {
+					Lista.addFirst(vetLinha);
+				}
+				linha = buffer.readLine();
+			}
+			buffer.close();
+			leitorFluxo.close();
+			abreFluxoArq.close();
+		}
+				
+		
+	}
+	public void buscarOrientacaoExpecifica (String iD, ListaObject Lista) throws IOException {
+		File arq = new File("C:\\TEMP", "Orientaçoes.csv");
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream abreFluxoArq = new FileInputStream(arq);
+			InputStreamReader leitorFluxo = new InputStreamReader(abreFluxoArq);
+			BufferedReader buffer = new BufferedReader(leitorFluxo);
+			String linha = buffer.readLine();
+			while (linha != null) {
+				String[] vetLinha = linha.split(";");
+				if (vetLinha[1].contains(iD)) {
+					Lista.addFirst(linha);
+				}
+				linha = buffer.readLine();
+			}
+			buffer.close();
+			leitorFluxo.close();
+			abreFluxoArq.close();
+		}
 	}
 }

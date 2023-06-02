@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import javax.swing.DebugGraphics;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,24 +19,26 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.Buscar;
 import controllerFila.FilaObject;
+import listaObject.ListaObject;
+import telaController.ControllerConsultaGrupo;
 import telaController.Listas;
 
-import javax.swing.ListSelectionModel;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.border.CompoundBorder;
-import javax.swing.JList;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JTextPane;
+import javax.swing.JCheckBox;
 
 public class TelaConsultaGrupos {
 	private JTextField textFieldID;
 	private JComboBox<Object> comboBoxSubarea;
 	private JTable table;
-
+	private int cont = 0;
+	private ListaObject Lista = new ListaObject();
+	private ListaObject ListaNova = new ListaObject();
+	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -192,13 +193,185 @@ public class TelaConsultaGrupos {
 		tabbedPaneGrupos.addTab("Orientações", null, panelOrientações, null);
 		panelOrientações.setLayout(null);
 		
+		JTabbedPane Orientação = new JTabbedPane(JTabbedPane.TOP);
+		Orientação.setBounds(0, 0, 329, 312);
+		panelOrientações.add(Orientação);
+		
+		JPanel panelInformaçoes = new JPanel();
+		Orientação.addTab("Informaçoes", null, panelInformaçoes, null);
+		panelInformaçoes.setLayout(null);
+		
+		
+		
+		
+		JLabel lblData = new JLabel("Data:");
+		lblData.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblData.setHorizontalAlignment(SwingConstants.CENTER);
+		lblData.setBounds(0, 24, 108, 25);
+		panelInformaçoes.add(lblData);
+		
+		JLabel lblDataView = new JLabel("");
+		lblDataView.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblDataView.setBounds(110, 24, 214, 25);
+		panelInformaçoes.add(lblDataView);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 80, 324, 152);
+		panelInformaçoes.add(scrollPane);
+		
+		JTextPane textPaneDescricao = new JTextPane();
+		textPaneDescricao.setEditable(false);
+		scrollPane.setViewportView(textPaneDescricao);
+		
+		JLabel lblDescrio = new JLabel("Descrição:");
+		lblDescrio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDescrio.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblDescrio.setBounds(0, 56, 324, 25);
+		panelInformaçoes.add(lblDescrio);
+		
+		
+		JPanel panelBox = new JPanel();
+		Orientação.addTab("Orientaçoes dadas", null, panelBox, null);
+		panelBox.setLayout(null);
+		
+		JCheckBox chckbx1 = new JCheckBox("");
+		chckbx1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.ajutaNovaLista(ListaNova,cont,3,chckbx1);
+			}
+		});
+		chckbx1.setVisible(false);
+		chckbx1.setBounds(6, 7, 21, 23);
+		panelBox.add(chckbx1);
+		
+		JLabel lbl1 = new JLabel("");
+		lbl1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl1.setVisible(false);
+		lbl1.setBounds(29, 7, 295, 23);
+		panelBox.add(lbl1);
+		
+		JCheckBox chckbx2 = new JCheckBox("");
+		chckbx2.setVisible(false);
+		chckbx2.setBounds(6, 33, 21, 23);
+		panelBox.add(chckbx2);
+		
+		JLabel lbl2 = new JLabel("");
+		lbl2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl2.setVisible(false);
+		lbl2.setBounds(29, 32, 295, 23);
+		panelBox.add(lbl2);
+		
+		JCheckBox chckbx3 = new JCheckBox("");
+		chckbx3.setVisible(false);
+		chckbx3.setBounds(6, 59, 21, 23);
+		panelBox.add(chckbx3);
+		
+		JCheckBox chckbx4 = new JCheckBox("");
+		chckbx4.setVisible(false);
+		chckbx4.setBounds(6, 85, 21, 23);
+		panelBox.add(chckbx4);
+		
+		JCheckBox chckbx5 = new JCheckBox("");
+		chckbx5.setVisible(false);
+		chckbx5.setBounds(6, 111, 21, 23);
+		panelBox.add(chckbx5);
+		
+		JCheckBox chckbx6 = new JCheckBox("");
+		chckbx6.setVisible(false);
+		chckbx6.setBounds(6, 137, 21, 23);
+		panelBox.add(chckbx6);
+		
+		JCheckBox chckbx7 = new JCheckBox("");
+		chckbx7.setVisible(false);
+		chckbx7.setBounds(6, 163, 21, 23);
+		panelBox.add(chckbx7);
+		
+		JCheckBox chckbx8 = new JCheckBox("");
+		chckbx8.setVisible(false);
+		chckbx8.setBounds(6, 189, 21, 23);
+		panelBox.add(chckbx8);
+		
+		JCheckBox chckbx9 = new JCheckBox("");
+		chckbx9.setVisible(false);
+		chckbx9.setBounds(6, 215, 21, 23);
+		panelBox.add(chckbx9);
+		
+		JCheckBox chckbx10 = new JCheckBox("");
+		chckbx10.setVisible(false);
+		chckbx10.setBounds(6, 241, 21, 23);
+		panelBox.add(chckbx10);
+		
+		JLabel lbl3 = new JLabel("");
+		lbl3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl3.setVisible(false);
+		lbl3.setBounds(29, 59, 295, 23);
+		panelBox.add(lbl3);
+		
+		JLabel lbl4 = new JLabel("");
+		lbl4.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl4.setVisible(false);
+		lbl4.setBounds(29, 85, 295, 23);
+		panelBox.add(lbl4);
+		
+		JLabel lbl5 = new JLabel("");
+		lbl5.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl5.setVisible(false);
+		lbl5.setBounds(29, 111, 295, 23);
+		panelBox.add(lbl5);
+		
+		JLabel lbl6 = new JLabel("");
+		lbl6.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl6.setVisible(false);
+		lbl6.setBounds(29, 137, 295, 23);
+		panelBox.add(lbl6);
+		
+		JLabel lbl7 = new JLabel("");
+		lbl7.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl7.setVisible(false);
+		lbl7.setBounds(29, 163, 295, 23);
+		panelBox.add(lbl7);
+		
+		JLabel lbl8 = new JLabel("");
+		lbl8.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl8.setVisible(false);
+		lbl8.setBounds(29, 189, 295, 23);
+		panelBox.add(lbl8);
+		
+		JLabel lbl9 = new JLabel("");
+		lbl9.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl9.setVisible(false);
+		lbl9.setBounds(29, 215, 295, 23);
+		panelBox.add(lbl9);
+		
+		JLabel lbl10 = new JLabel("");
+		lbl10.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl10.setVisible(false);
+		lbl10.setBounds(29, 241, 295, 23);
+		panelBox.add(lbl10);
+		
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(0, 62, 345, 278);
 		Consulta.add(scrollPane_3);
 		
+		JButton btnSalvarAlteracoes = new JButton("Salvar Alterações");
+		btnSalvarAlteracoes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				C.salvar(Integer.parseInt(lblIDMostra.toString()),ListaNova);
+			}
+		});
+		btnSalvarAlteracoes.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnSalvarAlteracoes.setBounds(45, 237, 238, 47);
+		panelInformaçoes.add(btnSalvarAlteracoes);
+		JLabel[] labels = {lbl1,lbl2,lbl3,lbl4,lbl5,lbl6,lbl7,lbl8,lbl9,lbl10};
+		JCheckBox[]checkBox = {chckbx1,chckbx2,chckbx3,chckbx4,chckbx5,chckbx6,chckbx7,chckbx8,chckbx9,chckbx10};
+		
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				cont = 0;
+
 				try {
 					String[] vt = new String[8];
 					if (table.getValueAt(table.getSelectedRow(),0).toString().length()==4) {
@@ -211,9 +384,20 @@ public class TelaConsultaGrupos {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				lblTemaMostra.setText(table.getValueAt(table.getSelectedRow(),1).toString());
+				
+				lblTemaMostra.setText(table.getValueAt(table.getSelectedRow(),1 ).toString());
 				lblIDMostra.setText(table.getValueAt(table.getSelectedRow(),0).toString());
 				lblSubareaMostra.setText(table.getValueAt(table.getSelectedRow(),2).toString());
+					ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+					try {
+						Lista = new ListaObject();
+						ListaNova = new ListaObject();
+						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox);
+						ListaNova = Lista;
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+
 			}
 		});
 		table.setModel(new DefaultTableModel(
@@ -226,6 +410,39 @@ public class TelaConsultaGrupos {
 		
 		scrollPane_3.setViewportView(table);
 		addTable(table,"","");
+		
+		JButton btnNewButton = new JButton("<-");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				try {
+					if (cont >0) {
+						cont--;
+						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox);
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBounds(0, 0, 160, 13);
+		panelInformaçoes.add(btnNewButton);
+		JButton btnNewButton_1 = new JButton("->");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerConsultaGrupo C = new ControllerConsultaGrupo();
+				if (cont < Lista.size()) {
+					cont++;
+					try {
+						C.selecionaOrientacao(lblDataView,lblIDMostra,Lista,textPaneDescricao,cont,labels,checkBox);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		btnNewButton_1.setBounds(164, 0, 160, 13);
+		panelInformaçoes.add(btnNewButton_1);
 	}
 	private void adiciona(FilaObject filaSub) {
 

@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="src/libs/PilhaJTextField.jar"/>
 	<classpathentry kind="lib" path="src/libs/FilaObject.jar"/>
 	<classpathentry kind="lib" path="src/libs/SetObject.jar"/>
+	<classpathentry kind="lib" path="src/libs/ListaEncadeada.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
