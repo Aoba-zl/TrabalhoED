@@ -204,7 +204,7 @@ public class TelaCadastrarOrientacao {
 		
 		
 		JButton btnSalvarOrientacao = new JButton("Salvar");
-		btnSalvarOrientacao.setBounds(495, 270, 148, 56);
+		btnSalvarOrientacao.setBounds(344, 273, 253, 56);
 		CadastrarOrientaçao.add(btnSalvarOrientacao);
 		btnSalvarOrientacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -260,11 +260,6 @@ public class TelaCadastrarOrientacao {
 			}
 		});
 		btnSalvarOrientacao.setFont(new Font("Tahoma", Font.BOLD, 16));
-		
-		JButton btnAtualizarOrientacao = new JButton("Atualizar");
-		btnAtualizarOrientacao.setBounds(307, 270, 148, 56);
-		CadastrarOrientaçao.add(btnAtualizarOrientacao);
-		btnAtualizarOrientacao.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		
 		Buscar = new JPanel();

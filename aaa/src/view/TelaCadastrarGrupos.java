@@ -3,6 +3,7 @@ package view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -277,7 +278,7 @@ public class TelaCadastrarGrupos {
 		panelGrupo_1.add(textFieldID);
 		
 		JButton btnSalvarGrupo = new JButton("Salvar");
-		btnSalvarGrupo.setBounds(499, 248, 148, 56);
+		btnSalvarGrupo.setBounds(411, 248, 148, 56);
 		btnSalvarGrupo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				grupo.setTema(textTema.getText());
@@ -288,10 +289,6 @@ public class TelaCadastrarGrupos {
 		});
 		btnSalvarGrupo.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panelGrupo_1.add(btnSalvarGrupo);
-		JButton btnAtualizarGrupo = new JButton("Atualizar");
-		btnAtualizarGrupo.setBounds(341, 248, 148, 56);
-		btnAtualizarGrupo.setFont(new Font("Tahoma", Font.BOLD, 16));
-		panelGrupo_1.add(btnAtualizarGrupo);
 		
 		comboBox = new JComboBox();
 		comboBox.setMaximumRowCount(999999);

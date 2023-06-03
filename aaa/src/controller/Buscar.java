@@ -78,7 +78,7 @@ public class Buscar {
 			String linha = buffer.readLine();
 			while (linha != null) {
 				String[] vetLinha = linha.split(";");
-				if (grupo < 10) {
+				if (grupo < 9) {
 					filaGrupo.insert("0"+(grupo+1)+""+vetLinha[2]);
 				}else {
 					filaGrupo.insert((grupo+1)+""+vetLinha[2]);

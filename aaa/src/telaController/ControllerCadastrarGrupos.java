@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import controller.Atualizar;
 import controller.Buscar;
 import controller.Salvar;
 import controllerFila.FilaObject;
@@ -101,6 +102,35 @@ public class ControllerCadastrarGrupos {
 			e1.printStackTrace();
 		}
 	}
+	public void btnAtualizar (Grupo grupo, JTextField textAluno1, JTextField textAluno2, JTextField textAluno3, JTextField textAluno4, JTextField textTema, JComboBox comboBox, String iD, JTextField IDNovo) throws Exception {
+		JTextField[] vt = {textAluno1,textAluno2,textAluno3,textAluno4};
+			int idGrupo = 0;
+			Buscar B = new Buscar();
+			String alunos = "";
+			for (int J=0;J<4;J++) {
+				if (vt[J].isVisible()) {
+					alunos = alunos+";"+vt[J].getText();
+				}
+			}
+			int idArq = Integer.parseInt(iD.charAt(0)+""+iD.charAt(1));
+			if (iD.length() == 3) {
+				idGrupo = Integer.parseInt(iD.charAt(2)+"");
+			}else {
+				idGrupo = Integer.parseInt(iD.charAt(2)+""+iD.charAt(3));
+			}
+			
+		String[]antigoGrupo = B.buscarGrupoExpecifico(idGrupo, idArq);
+		String NovoGrupo = "";
+		Atualizar A = new Atualizar();
+		if (antigoGrupo[1].contains(comboBox.getSelectedItem().toString())) {
+			NovoGrupo = textTema.getText()+";"+comboBox.getSelectedItem()+";"+idGrupo+";"+grupo.getQuantidade()+alunos;
+			A.atualizarGrupos(NovoGrupo, iD, iD);
+		} else {
+			NovoGrupo = textTema.getText()+";"+comboBox.getSelectedItem()+";"+IDNovo.getText().toString()+";"+grupo.getQuantidade()+alunos;
+			A.atualizarGrupos(NovoGrupo, iD, IDNovo.getText());
+		}
+		
+	}
 	private int secID(int iD) throws IOException {
 		String arquivo = iD+"Grupo.csv";
 		File arq = new File("C:\\TEMP", arquivo);
@@ -112,6 +142,9 @@ public class ControllerCadastrarGrupos {
 			int cont = 0;
 			while (linha != null) {
 				cont++;
+				if (linha == ".") {
+					break;
+				}
 				linha = buffer.readLine();
 			}
 			buffer.close();
