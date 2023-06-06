@@ -12,7 +12,7 @@ import PilhaObject.PilhaObject;
 import controllerFila.FilaObject;
 import modelObject.ISetObject;
 
-public class Atualizar {
+public class Atualizar implements IAtualizar {
 	public void atualizarAluno (PilhaObject pilhaPrincipal) throws Exception {
 		File nome = new File("C:\\TEMP", "Aluno.csv");
 		// Criando novo arquivo

@@ -12,7 +12,7 @@ import listaObject.ListaObject;
 import modelObject.ISetObject;
 
 
-public class Buscar {
+public class Buscar implements IBuscar {
 	public PilhaObject buscarAluno(PilhaObject pilhaAluno) throws IOException {
 		File arq = new File("C:\\TEMP", "Aluno.csv");
 		if (arq.exists() && arq.isFile()) {
