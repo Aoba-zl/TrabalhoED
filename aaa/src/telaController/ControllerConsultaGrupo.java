@@ -75,8 +75,12 @@ public class ControllerConsultaGrupo {
 			for (int J=1;J<tam;J++) {
 				juntar = juntar+";"+vetLinha[J];
 			}
+			if (listaNova.isEmpty()){
+				listaNova.addFirst(juntar);
+			}else {
+				listaNova.add(juntar, cont);
+			}
 			
-			listaNova.add(juntar, cont);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
